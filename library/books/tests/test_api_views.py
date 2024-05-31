@@ -15,7 +15,7 @@ class BookAPITest(APITestCase):
             book_file="books/pdf/test_book.pdf"
         )
         self.book_url = reverse('book-detail', kwargs={'pk': self.book.pk})
-        self.books_url = reverse('book-list-create')
+        self.books_url = reverse('book-list')
 
     def test_get_books(self):
         response = self.client.get(self.books_url)
@@ -38,7 +38,7 @@ class BookAPITest(APITestCase):
             "book_file": "books/pdf/new_test_book.pdf"
         }
         response = self.client.post(self.books_url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_put_book(self):
         # Ensure PUT request is forbidden
@@ -50,9 +50,9 @@ class BookAPITest(APITestCase):
             "book_file": "books/pdf/updated_test_book.pdf"
         }
         response = self.client.put(self.book_url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_delete_book(self):
         # Ensure DELETE request is forbidden
         response = self.client.delete(self.book_url)
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
