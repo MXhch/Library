@@ -13,7 +13,7 @@ class Book(models.Model):
 
   title = models.CharField(max_length=150)
   author = models.CharField(max_length=70)
-  cover = models.ImageField(storage="books/images/covers/")
+  cover = models.ImageField(upload_to="books/images/covers/")
   genre = models.CharField(max_length=50, choices=_GENRES)
   book_file = models.FileField("PDF File", upload_to="books/pdf/", max_length=100)
 
