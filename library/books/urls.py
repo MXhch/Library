@@ -8,5 +8,6 @@ router = DefaultRouter()
 router.register(r'books', BookViewSet, basename='book')
 urlpatterns = [
   path('', HomepageView.as_view(), name="homepage"),
+  path('library/', HomepageView.as_view(), name="library"),
   path('api/', include(router.urls)),
 ]
