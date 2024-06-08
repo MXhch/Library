@@ -3,6 +3,7 @@ from rest_framework import status
 from django.urls import reverse
 from ..models import Book
 
+
 # Test your api views here.
 class BookAPITest(APITestCase):
 
@@ -21,7 +22,10 @@ class BookAPITest(APITestCase):
         response = self.client.get(self.books_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data.get('results')), 1)
-        self.assertEqual(response.data.get('results')[0]['title'], self.book.title)
+        self.assertEqual(
+            response.data.get('results')[0]['title'],
+            self.book.title
+        )
 
     def test_get_book_detail(self):
         response = self.client.get(self.book_url)
