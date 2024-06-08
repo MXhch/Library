@@ -20,8 +20,8 @@ class BookAPITest(APITestCase):
     def test_get_books(self):
         response = self.client.get(self.books_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]['title'], self.book.title)
+        self.assertEqual(len(response.data.get('results')), 1)
+        self.assertEqual(response.data.get('results')[0]['title'], self.book.title)
 
     def test_get_book_detail(self):
         response = self.client.get(self.book_url)
